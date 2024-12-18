@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import emailjs from "emailjs-com";
+
+import axios from 'axios';
 // Country List Array
 const countries = [
   { name: "India", code: "+91", flag: "🇮🇳" },
@@ -13,50 +14,30 @@ const countries = [
 const HiringRequestForm = () => {
   const { handleSubmit, control, register } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     const userName = data.contactName;
     const userEmail = data.email;
 
-    // Email to the user
-    const userParams = {
-      to_name: userName,
-      user_email: userEmail,
-      message: "Thank you for filling out the form! We will get back to you soon.",
-    };
 
-    // Email to the owner
-    const ownerParams = {
-      from_name: userName,
-      user_email: userEmail,
-      form_details: `The user ${userName} (${userEmail}) has filled out the form. Check the admin dashboard for more details.`,
-    };
+    try {
+      // Send data to the backend using Axios
+      const response = await axios.post("http://localhost:5000/send-email", {
+        name: userName,
+        email: userEmail,
+        // message: data.message, // Assuming there's a message field in the form
+      });
 
-    // Send email to user
-    emailjs
-      .send("service_sj8o50p", "template_vmn7kn8", userParams, "QIJVal9LcHCwz9bc1")
-      .then(
-        (response) => {
-          console.log("User email sent successfully!", response.status, response.text);
-        },
-        (error) => {
-          console.error("Failed to send user email:", error);
-        }
-      );
+      if (response.status === 200) {
+        alert("Form has been submitted successfully!");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+      alert("Error occurred while submitting the form. Please try again.");
+    }
 
-    // Send email to owner
-    emailjs
-      .send("service_sj8o50p", "template_i55l5gu", ownerParams, "QIJVal9LcHCwz9bc1")
-      .then(
-        (response) => {
-          console.log("Owner email sent successfully!", response.status, response.text);
-        },
-        (error) => {
-          console.error("Failed to send owner email:", error);
-        }
-      );
-
-    alert("Form has been submitted successfully!");
   };
 
 
