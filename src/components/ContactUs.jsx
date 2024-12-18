@@ -22,14 +22,14 @@ const HiringRequestForm = () => {
 
     try {
       // Send data to the backend using Axios
-      const response = await axios.post("http://localhost:5000/send-email", {
+      const response = await axios.post("https://emailsendbackend.onrender.com/send-email", {
         name: userName,
         email: userEmail,
         // message: data.message, // Assuming there's a message field in the form
       });
 
       if (response.status === 200) {
-        alert("Form has been submitted successfully!");
+        alert("Form has been submitted successfully! Check Your Email");
       } else {
         alert("Something went wrong. Please try again.");
       }
