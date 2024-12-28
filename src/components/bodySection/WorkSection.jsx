@@ -1,14 +1,6 @@
 import React from 'react'
-import handshake from '../../assets/handshake.png';
-import bothman from '../../assets/bothman.png';
-import code from '../../assets/code.png';
-import filePath from '../../assets/filePath.png';
-import Rectangle from '../../assets/Rectangle.png';
-import code2 from '../../assets/code2.png';
-import Rectangle2 from '../../assets/Rectangle2.png';
-import bracket from '../../assets/bracket.png';
-import Rectangle3 from '../../assets/Rectangle3.png';
 
+import HireFromUs from "@/assets/HireFromUs";
 function WorkSection() {
   const steps = [
     "A quick sign-up process",
@@ -19,15 +11,15 @@ function WorkSection() {
   ];
 
   const images = [
-    { src: handshake, bgColor: 'bg-[#D9E3FF]' },
-    { src: bothman, bgColor: 'bg-[#E4F4FF]' },
-    { src: code, bgColor: 'bg-[#FFBAD9]' },
-    { src: Rectangle, bgColor: 'bg-[#E4F4FF]' },
-    { src: filePath, bgColor: 'bg-[#FFD700]' },
-    { src: code2, bgColor: 'bg-[#DAFFD9]' },
-    { src: Rectangle2, bgColor: 'bg-[#D9E3FF]' },
-    { src: bracket, bgColor: 'bg-[#6394FB]' },
-    { src: Rectangle3, bgColor: 'bg-[#E4F4FF]' },
+    HireFromUs.HIW1,
+    HireFromUs.HTW2,
+    HireFromUs.HIW3,
+    HireFromUs.HIW4,
+    HireFromUs.HIW5,
+    HireFromUs.HIW6,
+    HireFromUs.HIW7,
+    HireFromUs.HIW8,
+    HireFromUs.HIW9,
   ];
 
   return (
@@ -53,24 +45,22 @@ function WorkSection() {
           </div>
 
           {/* Right Section: Image Grid */}
-          <div className="lg:w-[45%] grid grid-cols-2 md:grid-cols-3 gap-4">
-            {images.map((item, index) => (
-              <div
-                key={index}
-                className={`relative ${item.bgColor} flex items-center justify-center p-4 rounded-lg`}
-              >
+          <div className="flex flex-col w-full lg:w-[40%] items-start mt-8 lg:mt-0 py-8 lg:py-14">
+            <div className="grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-4">
+              {images.map((image, index) => (
                 <img
-                  src={item.src}
-                  alt={`Step ${index + 1}`}
-                  className="w-3/4 h-auto object-contain"
+                  key={index}
+                  src={image}
+                  alt={`hiw-${index + 1}`}
+                  className="w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 object-cover rounded-md border-Light_Periwinkle border-2"
                 />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default WorkSection
